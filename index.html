@@ -9,8 +9,8 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #050810;
-    --bg2: #0c1220;
+    --bg: #00000f;
+    --bg2: #00000f;
     --accent: #00e5ff;
     --accent2: #7c3aed;
     --accent3: #f472b6;
@@ -684,7 +684,7 @@
         Associate Analyst in Learning Admin & Data Engineering. I build automated pipelines, design robust database schemas, and bridge learning management with cutting-edge tech.
       </p>
       <div class="hero-btns">
-        <a href="/cdn-cgi/l/email-protection#2d6c5f434c5b1c191d1c5e44434a456d4a404c4441034e4240" class="btn-primary">Get in touch →</a>
+        <a href="/cdn-cgi/l/email-protection#bafbc8d4dbcc8b8e8a8bc9d3d4ddd2faddd7dbd3d694d9d5d7" class="btn-primary">Get in touch →</a>
         <a href="https://linkedin.com/in/akash-anshuman-30702727a" class="btn-outline">LinkedIn ↗</a>
       </div>
       <div class="stats">
@@ -924,9 +924,9 @@
       <div class="section-label" style="justify-content: center; display: flex;">Let's connect</div>
       <h2>Ready to build<br/><span class="gradient-text">something great?</span></h2>
       <p>I'm actively looking for opportunities in data engineering, ML, and learning technology. Let's talk!</p>
-      <a href="/cdn-cgi/l/email-protection#96d7e4f8f7e0a7a2a6a7e5fff8f1fed6f1fbf7fffab8f5f9fb" class="btn-primary">Send me an email →</a>
+      <a href="/cdn-cgi/l/email-protection#c485b6aaa5b2f5f0f4f5b7adaaa3ac84a3a9a5ada8eaa7aba9" class="btn-primary">Send me an email →</a>
       <div class="contact-links">
-        <a href="/cdn-cgi/l/email-protection#7c3d0e121d0a4d484c4d0f15121b143c1b111d1510521f1311" class="contact-link">✉️ <span class="__cf_email__" data-cfemail="6524170b041354515554160c0b020d250208040c094b060a08">[email&#160;protected]</span></a>
+        <a href="/cdn-cgi/l/email-protection#e1a0938f8097d0d5d1d092888f8689a1868c80888dcf828e8c" class="contact-link">✉️ <span class="__cf_email__" data-cfemail="6524170b041354515554160c0b020d250208040c094b060a08">[email&#160;protected]</span></a>
         <a href="tel:+917905111388" class="contact-link">📞 +91 79051 11388</a>
         <a href="https://linkedin.com/in/akash-anshuman-30702727a" class="contact-link">🔗 LinkedIn</a>
         <a class="contact-link">📍 Bhubaneswar, India</a>
@@ -970,107 +970,100 @@ document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el =>
   });
 });
 
-// 3D Particle Background
+// Starfield Background
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
-let W, H, particles = [];
-const NUM = 120;
+let W, H, stars = [], nebulaClouds = [];
 
 function resize() {
   W = canvas.width = window.innerWidth;
   H = canvas.height = window.innerHeight;
+  initStars();
 }
+
+function initStars() {
+  stars = [];
+  nebulaClouds = [];
+  for (let i = 0; i < 800; i++) {
+    stars.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 0.7 + 0.1,
+      alpha: Math.random() * 0.6 + 0.2,
+      twinkleSpeed: Math.random() * 0.02 + 0.005,
+      twinkleOffset: Math.random() * Math.PI * 2,
+      hue: Math.random() < 0.6 ? 210 : 200,
+      sat: Math.random() * 30 + 60,
+      glow: false
+    });
+  }
+  for (let i = 0; i < 40; i++) {
+    const bright = Math.random() < 0.3;
+    stars.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: bright ? Math.random() * 2.5 + 1.5 : Math.random() * 1.2 + 0.6,
+      alpha: bright ? Math.random() * 0.3 + 0.7 : Math.random() * 0.4 + 0.4,
+      twinkleSpeed: Math.random() * 0.015 + 0.003,
+      twinkleOffset: Math.random() * Math.PI * 2,
+      hue: 205, sat: 70, glow: bright
+    });
+  }
+  for (let i = 0; i < 5; i++) {
+    nebulaClouds.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 200 + 100,
+      alpha: Math.random() * 0.04 + 0.01,
+      hue: Math.random() < 0.5 ? 210 : 240
+    });
+  }
+}
+
 resize();
 window.addEventListener('resize', resize);
 
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random() * W;
-    this.y = Math.random() * H;
-    this.z = Math.random() * 1200 + 200;
-    this.ox = this.x;
-    this.oy = this.y;
-    this.vx = (Math.random() - 0.5) * 0.3;
-    this.vy = (Math.random() - 0.5) * 0.3;
-    this.vz = -Math.random() * 1.5 - 0.5;
-    this.r = Math.random() * 1.5 + 0.5;
-    this.hue = Math.random() < 0.5 ? 185 : Math.random() < 0.5 ? 270 : 320;
-    this.alpha = Math.random() * 0.5 + 0.2;
-  }
-  update() {
-    this.z += this.vz;
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.z < 1) this.reset();
-  }
-  draw() {
-    const scale = 1000 / this.z;
-    const sx = (this.x - W/2) * scale + W/2;
-    const sy = (this.y - H/2) * scale + H/2;
-    const sr = this.r * scale;
-    const a = this.alpha * Math.min(1, (1200 - this.z) / 800);
-    if (sx < 0 || sx > W || sy < 0 || sy > H) { this.reset(); return; }
+let t = 0;
+function animateStars() {
+  ctx.fillStyle = '#00000f';
+  ctx.fillRect(0, 0, W, H);
+
+  nebulaClouds.forEach(n => {
+    const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+    grad.addColorStop(0, `hsla(${n.hue}, 60%, 50%, ${n.alpha})`);
+    grad.addColorStop(1, 'transparent');
     ctx.beginPath();
-    ctx.arc(sx, sy, Math.max(0.3, sr), 0, Math.PI * 2);
-    ctx.fillStyle = `hsla(${this.hue}, 80%, 70%, ${a})`;
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
     ctx.fill();
-  }
-}
+  });
 
-for (let i = 0; i < NUM; i++) particles.push(new Particle());
-
-// Grid lines
-function drawGrid() {
-  const cols = 12, rows = 8;
-  const cw = W / cols, ch = H / rows;
-  ctx.strokeStyle = 'rgba(0,229,255,0.03)';
-  ctx.lineWidth = 1;
-  for (let i = 0; i <= cols; i++) {
-    ctx.beginPath();
-    ctx.moveTo(i * cw, 0);
-    ctx.lineTo(i * cw, H);
-    ctx.stroke();
-  }
-  for (let i = 0; i <= rows; i++) {
-    ctx.beginPath();
-    ctx.moveTo(0, i * ch);
-    ctx.lineTo(W, i * ch);
-    ctx.stroke();
-  }
-}
-
-// Connections
-function drawConnections() {
-  for (let i = 0; i < particles.length; i++) {
-    const scale1 = 1000 / particles[i].z;
-    const sx1 = (particles[i].x - W/2) * scale1 + W/2;
-    const sy1 = (particles[i].y - H/2) * scale1 + H/2;
-    for (let j = i+1; j < particles.length; j++) {
-      const scale2 = 1000 / particles[j].z;
-      const sx2 = (particles[j].x - W/2) * scale2 + W/2;
-      const sy2 = (particles[j].y - H/2) * scale2 + H/2;
-      const dist = Math.hypot(sx2-sx1, sy2-sy1);
-      if (dist < 100) {
-        ctx.beginPath();
-        ctx.moveTo(sx1, sy1);
-        ctx.lineTo(sx2, sy2);
-        ctx.strokeStyle = `rgba(0,229,255,${0.06 * (1 - dist/100)})`;
+  stars.forEach(s => {
+    const twinkle = Math.sin(t * s.twinkleSpeed * 60 + s.twinkleOffset) * 0.3 + 0.7;
+    const alpha = s.alpha * twinkle;
+    if (s.glow && s.r > 1.5) {
+      const grd = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 5);
+      grd.addColorStop(0, `hsla(${s.hue}, ${s.sat}%, 90%, ${alpha * 0.6})`);
+      grd.addColorStop(0.4, `hsla(${s.hue}, ${s.sat}%, 80%, ${alpha * 0.2})`);
+      grd.addColorStop(1, 'transparent');
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r * 5, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+      if (s.r > 2.5) {
+        ctx.strokeStyle = `hsla(${s.hue}, ${s.sat}%, 90%, ${alpha * 0.3})`;
         ctx.lineWidth = 0.5;
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(s.x - s.r*8, s.y); ctx.lineTo(s.x + s.r*8, s.y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(s.x, s.y - s.r*8); ctx.lineTo(s.x, s.y + s.r*8); ctx.stroke();
       }
     }
-  }
-}
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${s.hue}, ${s.sat}%, 90%, ${alpha})`;
+    ctx.fill();
+  });
 
-function animate() {
-  ctx.clearRect(0, 0, W, H);
-  drawGrid();
-  drawConnections();
-  particles.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(animate);
+  t++;
+  requestAnimationFrame(animateStars);
 }
-animate();
+animateStars();
 
 // Scroll reveal
 const observer = new IntersectionObserver(entries => {
@@ -1085,4 +1078,12 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 // Mouse parallax on orbs
 document.addEventListener('mousemove', e => {
   const x = (e.clientX / window.innerWidth - 0.5) * 30;
-  const y
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  document.querySelectorAll('.orb').forEach((orb, i) => {
+    const factor = (i + 1) * 0.4;
+    orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+  });
+});
+</script>
+</body>
+</html>
